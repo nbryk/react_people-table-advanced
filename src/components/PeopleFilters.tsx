@@ -1,4 +1,4 @@
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import classNames from 'classnames';
 import { getSearchWith, SearchParams } from '../utils/searchHelper';
 import { SearchLink } from './SearchLink';
@@ -14,8 +14,6 @@ export const PeopleFilters = () => {
 
   const centuries = searchParams.getAll('centuries') || [];
 
-  const location = useLocation();
-
   const setSearchWith = (params: SearchParams) => {
     const search = getSearchWith(searchParams, params);
 
@@ -30,10 +28,6 @@ export const PeopleFilters = () => {
     return centuries.includes(century)
       ? centuries.filter(c => c !== century)
       : [...centuries, century];
-  };
-
-  const onResetAll = () => {
-    return getSearchWith(new URLSearchParams(), {});
   };
 
   return (
@@ -120,13 +114,7 @@ export const PeopleFilters = () => {
         </div>
 
         <div className="panel-block">
-          <Link
-            className="button is-link is-outlined is-fullwidth"
-            to={{
-              pathname: location.pathname,
-              search: onResetAll(),
-            }}
-          >
+          <Link className="button is-link is-outlined is-fullwidth" to="?">
             Reset all filters
           </Link>
         </div>
